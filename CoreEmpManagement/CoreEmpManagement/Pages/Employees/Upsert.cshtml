@@ -1,0 +1,62 @@
+﻿@page
+@model CoreEmpManagement.Pages.Employees.UpsertModel
+@{
+}
+
+
+<h2 class="text-info">@(Model.Employee.ID==0?"New ":"Edit ") Employee (Upsert)</h2>
+
+<div class="container border" style="padding:30px">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+        @if(Model.Employee.ID!=0)
+        {
+        <input type="hidden" asp-for="Employee.ID" />
+        }
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Employee.Name"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Employee.Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Employee.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Employee.Age"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Employee.Age" class="form-control" />
+            </div>
+            <span asp-validation-for="Employee.Age" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Employee.Location"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Employee.Location" class="form-control" />
+            </div>
+            <span asp-validation-for="Employee.Location" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Employee.Salary"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Employee.Salary" class="form-control" />
+            </div>
+            <span asp-validation-for="Employee.Salary" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input class="form-control btn btn-primary" value="@(Model.Employee.ID==0?"Create":"Update")" type="submit" />
+            </div>
+            <div class="col-3">
+                <a asp-page="Index" class="form-control btn btn-success">Back To List</a>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,74 @@
+﻿@page
+@model CoreEmpManagement.Pages.Employees.IndexModel
+@{
+}
+
+<div class="container row m-0 p-0">
+    <div class="col-9">
+        <h2 class="text-info">Employee List</h2>
+    </div>
+    <div class="col-3">
+        <a class="btn btn-info form-control text-white" asp-page="Create">Create Employee</a>
+        <a class="btn btn-info form-control text-white" asp-page="Upsert">Create Employee (Upsert)</a>
+    </div>
+
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            @if (Model.Employees.Count > 0)
+            {
+                <table class="table table-striped border">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th><label asp-for="@Model.Employees.FirstOrDefault().Name"></label></th>
+                            <th><label asp-for="@Model.Employees.FirstOrDefault().Age"></label></th>
+                            <th><label asp-for="@Model.Employees.FirstOrDefault().Location"></label></th>
+                            <th><label asp-for="@Model.Employees.FirstOrDefault().Salary"></label></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var emp in Model.Employees)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x => emp.Name)</td>
+                            <td>@Html.DisplayFor(x => emp.Age)</td>
+                            <td>@Html.DisplayFor(x => emp.Location)</td>
+                            <td>@Html.DisplayFor(x => emp.Salary)</td>
+                            <td>
+                                <button asp-route-Id="@emp.ID" class="btn btn-sm btn-danger" asp-page-handler="Delete"
+                                        onclick="return confirm('Do you want to delete the record?')">
+                                    Delete
+                                </button>
+                                <a asp-page="Edit" asp-route-Id="@emp.ID" class="btn btn-sm btn-success">Edit</a>
+                                <a asp-page="Upsert" asp-route-Id="@emp.ID" class="btn btn-sm btn-success">Edit(Upsert)</a>
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+
+            }
+            else
+            {
+                <p>No employees available. </p>
+            }
+        </form>
+    </div>
+    <div class="col-12 border p-3 mt-3">
+        <table id="dtEmp" class="table table-striped border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                    <th>Salary</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/Emp.js"></script>
+}
